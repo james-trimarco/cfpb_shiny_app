@@ -10,12 +10,12 @@ library(lubridate)
 library(maps)
 library(here)
 
-
-
 options(shiny.reactlog = TRUE)
 
 url_stem <- "https://data.consumerfinance.gov/resource/s6ew-h6mp.json?"
-state_match <- read.csv("./state_match.csv")
+
+state_match <- read.csv(here("state_match.csv"), stringsAsFactors = FALSE) %>%
+    mutate(state_name_lc = str_to_lower(state_name))
 
 cfpb_cols <- list("company", "company_public_response", "company_response", "complaint_id",
                   "consumer_consent_provided","consumer_disputed", "date_received", "date_sent_to_company",     
