@@ -65,8 +65,7 @@ shinyServer(function(input, output, session) {
             group_by(state) %>%
             summarize(n = n()) %>%
             arrange(desc(n)) %>% head(8)
-        
-        #print(dat)
+
 
         p <- ggplot(dat, aes(x = reorder(state, -n), y = n)) +
             scale_y_continuous() +
@@ -100,16 +99,16 @@ shinyServer(function(input, output, session) {
         # synchronously react user input and show the updated results.
         map_data <- bank_spec() %>%
             drop_na(state) %>%
-            group_by(state) %>%
-            join(state_match, by = )
+            inner_join(state_match, by = c("state" = "state_abbr")) %>%
+            group_by(state_name_lc) %>%
             summarize(n = n())
         
         print(map_data)
         
         states_map <- map_data("state")
             
-        ggplot(data = map_data, aes(map_id = state)) +
-            geom_map(aes(fill = factor(n), map = states_map) +
+        ggplot(data = map_data, aes(map_id = state_name_lc)) +
+            geom_map(aes(fill = n), map = states_map) +
             expand_limits(x = states_map$long, y = states_map$lat)
                
         # # Render the map using the filtered data
