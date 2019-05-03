@@ -5,10 +5,15 @@ library(RSocrata)
 library(tidyverse)
 library(shinydashboard)
 #library(bubbles)        # devtools::install_github("jcheng5/bubbles")
-source('config.R')
 library(lubridate)
 library(maps)
 library(here)
+library(glue)
+
+#shinyloadtest generates fake traffic to test how where it lags
+#profvis
+
+source('config.R')
 
 options(shiny.reactlog = TRUE)
 
@@ -31,9 +36,21 @@ large_banks <-  list("JPMORGAN CHASE & CO." = "JPMORGAN CHASE %26 CO.",
                      "CAPITAL ONE FINANCIAL CORPORATION", 
                      "SUNTRUST BANKS, INC.")
     
+#-------------
+# Function defs
+build_url <- function(company, start_date, end_date, limit){
+    select_p <- glue("$select=*", '',"&")
+    where_p <- glue("product='Checking or savings account'", " AND ", 
+                    "company=", "'{company}'", " AND ",
+                    "date_received > '{start_date}' AND date_received < '{end_date}'&")
+
+    limit_p <- "$limit={limit}"
+    
+    url <- glue(url_stem, select_p, where_p, limit_p)
+    return(url)
+}
 
 
-# 
 # 7 CAPITAL ONE FINANCIAL CORPORATION        33
 # 8 TD BANK US HOLDING COMPANY               33
 # 9 NAVY FEDERAL CREDIT UNION                30
