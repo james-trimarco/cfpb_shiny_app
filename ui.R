@@ -4,10 +4,16 @@ ui <- dashboardPage(
     ),
     
     dashboardSidebar(
+        checkboxInput("smooth", "Smooth"),
+        conditionalPanel(
+            condition = "input.smooth == true",
+            selectInput("smoothMethod", "Method",
+                        list("lm", "glm", "gam", "loess", "rlm"))
+        ),
         dateRangeInput("date_range", "Date range:",
                        min = "2010-01-01",
-                       start = '2019-01-01',
-                       end   = "2019-02-01"),
+                       start = Sys.Date() - 365,
+                       end   = Sys.Date() - 1),
         selectInput(inputId="company", label="Select column", 
                     choices = large_banks, selected = "BANK OF AMERICA, NATIONAL ASSOCIATION", 
                     multiple = FALSE)
@@ -18,8 +24,8 @@ ui <- dashboardPage(
         dashboardBody(
             fluidRow(
                 valueBoxOutput("total_count", width = 4),
-                valueBoxOutput("", width = 4),
-                valueBoxOutput("", width = 4)
+                valueBoxOutput("prop_paid", width = 4),
+                valueBoxOutput("tags", width = 4)
             ),
             fluidRow(
                 tabBox(id = "tab", width = 12,

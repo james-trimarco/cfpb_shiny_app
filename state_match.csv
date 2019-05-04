@@ -1,11 +1,11 @@
-state_name,state_abbr, fips
-Alabama,AL,01
-Alaska,AK,02
-Arizona,AZ,04
-Arkansas,AR,05
-California,CA,06
-Colorado,CO,08
-Connecticut,CT,09
+state_name,state, fips
+Alabama,AL,1
+Alaska,AK,2
+Arizona,AZ,4
+Arkansas,AR,5
+California,CA,6
+Colorado,CO,8
+Connecticut,CT,9
 Delaware,DE,10
 District of Columbia,DC,11
 Florida,FL,12
