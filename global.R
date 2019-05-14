@@ -1,7 +1,6 @@
 library(shiny)
 library(RSocrata)
 library(tidyverse)
-
 library(lubridate)
 library(maps)
 library(here)

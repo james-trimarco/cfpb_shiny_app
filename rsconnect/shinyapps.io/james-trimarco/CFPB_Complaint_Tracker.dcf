@@ -1,0 +1,12 @@
+name: CFPB_Complaint_Tracker
+title: CFPB_Complaint_Tracker
+username:
+account: james-trimarco
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 908545
+bundleId: 2083906
+url: https://james-trimarco.shinyapps.io/CFPB_Complaint_Tracker/
+when: 1557857695.61677
+asMultiple: FALSE
+asStatic: FALSE
